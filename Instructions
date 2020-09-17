@@ -1,0 +1,54 @@
+Intelligence Fusion Front End Developer Test
+============================================
+
+As is, this code uses callbacks to implement a naive observer pattern based application.
+The application is designed to show threat assessments for countries available in our API.
+
+The UI displays details of a Threat Model, this describes the risk factors that contribute 
+to the assessment and the Rating Levels that can be applied to each factor, as well as the
+(overall) assessment itself
+
+Under the Threat Model you should see a list of countries (2).
+
+Notes
+---------
+
+** Architecture **
+Our architecture is comprised of layers with specific responsibilities:
+[Gateways] These manage IO operations (please note that we are simulating a real API
+  for consistency/simplicity)
+[Repositories] Where state for a domain is kept and mutated, alongside business logic.
+[Presenters] A layer where basic transformations and selections can be done so that we can 
+  expose a 'viewmodel' object  that the dumb components can consume.
+
+** Components **
+These should be dumb.
+We do not expect tests, but if you feel comfortable then add them.
+
+** Tests **
+We expect tests to start with the presenters, these will give you initial state and methods 
+which you can use to mutate state (via the repository).
+We use a combination of mocks/spies/stubs to make sure our presenters get the information
+they need, and are able to communicate effectively up the stack.
+
+-------------
+| Challenge |
+-------------
+
+In addition to the specific tasks mentioned below, you will likely note a few inconsistencies 
+in naming, and a few areas where best practice is not being applied.  Part of our evaluation 
+will be how you handle these.
+
+Task 1
+------
+Your job is to take this implementation, add tests, and refactor so that we are using Mobx for state management.
+
+Task 2
+------
+Our API also surfaces, for each country, threat country assessment data.
+This data shows the current rating for each of the risk factors and the overall rating for the country.
+You job is to add a button so that each country can be selected.
+A selected country should then have its threat assessment displayed (you will see a placeholder in App.js
+for where this should be placed).
+
+In the task folder you will find an image that will show you the desired result for the country assessment component.
