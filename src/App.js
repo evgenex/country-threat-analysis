@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ThreatModelPresenter from "../ThreatModels/ThreatModelPresenter";
-import CountriesPresenter from "../Countries/CountriesPresenter";
+import ThreatModelPresenter from "./ThreatModels/ThreatModelPresenter";
+import CountriesPresenter from "./Countries/CountriesPresenter";
 import "./styles.css";
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
       });
     }
     load();
-  }, []);
+  });
 
   useEffect(() => {
     async function load2() {
@@ -31,7 +31,7 @@ export default function App() {
       });
     }
     load2();
-  }, []);
+  });
 
   return (
     <>
