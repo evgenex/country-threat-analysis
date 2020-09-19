@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 import ThreatModelPresenter from "./ThreatModels/ThreatModelPresenter";
 import CountriesPresenter from "./Countries/CountriesPresenter";
-import httpGateway from "./Shared/HttpGateway";
+import httpGateway from "./shared/HttpGateway";
 
 const threatModelPresenter = new ThreatModelPresenter();
 const countryPresenter = new CountriesPresenter();

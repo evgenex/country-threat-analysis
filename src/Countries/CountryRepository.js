@@ -1,5 +1,5 @@
-import httpGateway from "../Shared/HttpGateway";
-import Observable from "../Shared/Observable";
+import httpGateway from "../shared/HttpGateway";
+import Observable from "../shared/Observable";
 
 class CountriesRepository {
   programmersModel = new Observable([]);
