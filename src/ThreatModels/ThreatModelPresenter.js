@@ -6,7 +6,7 @@ export default class ThreatModelPresenter {
       const threatModelVm = {
         name: threatModelPm.name,
         threatRatings: threatModelPm.ratings.map((rating) => {
-          return { name: rating.name, colour: rating.colour };
+          return {id: rating.id, name: rating.name, colour: rating.colour, ranking: rating.ranking };
         }),
         threatFactors: threatModelPm.riskFactors.map((factor) => factor.name),
         pageTitle: "Country Threat Analysis"

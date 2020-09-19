@@ -1,72 +1,80 @@
-import React, { useState, useEffect } from "react";
-import ThreatModelPresenter from "./ThreatModels/ThreatModelPresenter";
-import CountriesPresenter from "./Countries/CountriesPresenter";
+import React from "react";
 import "./styles.css";
+import { observer } from "mobx-react";
 
-export default function App() {
-  const threatModelPresenter = new ThreatModelPresenter();
-  const countryPresenter = new CountriesPresenter();
+@observer
+class App extends React.Component {
 
-  const [localThreatModel, copyViewModelToLocalThreatModel] = useState({
-    name: "",
-    threatFactors: [],
-    threatRatings: []
-  });
+  componentDidMount=()=>{
+    this.props.store.loadThreatModel();
+    this.props.store.loadCountry();
+  }
 
-  const [localCountries, copyViewModelToLocalCountries] = useState([]);
+  render() {
+    const store = this.props.store;
 
-  useEffect(() => {
-    async function load() {
-      await threatModelPresenter.load((viewModel) => {
-        copyViewModelToLocalThreatModel(viewModel);
-      });
-    }
-    load();
-  });
-
-  useEffect(() => {
-    async function load2() {
-      await countryPresenter.load((viewModel) => {
-        copyViewModelToLocalCountries(viewModel);
-      });
-    }
-    load2();
-  });
-
-  return (
-    <>
+    return (
       <div className="App">
-        <h1>{localThreatModel.pageTitle}</h1>
-      </div>
+        <h1>{store.localThreatModel.pageTitle}</h1>
+        <div className="Model">
+          <h2>Threat Model: {store.localThreatModel.name}</h2>
+          <h3>Rating Levels</h3>
+          <ul>
+            {store.localThreatModel.threatRatings.map((rating, index) => (
+              <li key={index} className='Threat' style={{ color: rating.colour }}>{rating.name}</li>
+            ))}
+          </ul>
+          <h3>Risk Factors</h3>
+          <ul>
+            {store.localThreatModel.threatFactors.map((factor, index) => (
+              <li key={index} className='Factors'>{factor}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="Countries">
+          <h2>Country List</h2>
+          <div>
+            {store.localCountries.map((country) => (
+              <button 
+                key={country.countryCode}
+                onClick={()=>{store.loadAssessment(country.countryCode)}}
+                >
+                {country.countryName}
+                </button>
+            ))}
+          </div>
+        </div>
 
-      <div className="Model">
-        <h2>Threat Model: {localThreatModel.name}</h2>
-        <h3>Rating Levels</h3>
-        <ul>
-          {localThreatModel.threatRatings.map((rating) => (
-            <li style={{ color: rating.colour }}>{rating.name}</li>
-          ))}
-        </ul>
-        <h3>Risk Factors</h3>
-        <ul>
-          {localThreatModel.threatFactors.map((factor) => (
-            <li>{factor}</li>
-          ))}
-        </ul>
+        {store.selectedCountry.country!=='' &&
+          <div className="CountryAssessment">
+            <h2>Country Assessment</h2>
+            <div className="Info">
+              <div className="InfoBox">
+                  <div className="InfoBoxHeader">
+                    <div className="InfoBoxHeaderLine1">Overall Threat Level</div>
+                    <div className="InfoBoxHeaderLine2">
+                      {store.selectedCountry.overallRating.name}
+                    </div>
+                  </div>
+                  <div className="InfoBoxMain">
+                  {store.selectedCountry.riskFactors.map((item, index)=>
+                      <div className="InfoBoxContent" key={index}>
+                        <div className="InfoBoxContentText">
+                          <span>{item.name}</span>
+                          <span>{item.rating.name}</span>
+                        </div>
+                        <div className="InfoBoxContentLine">
+                          <div className="InfoBoxContentLineIndicator" style={{backgroundColor: `${item.rating.colour}`, width: `${100/item.rating.ranking}%`}}/>
+                        </div>
+                    </div>)}
+                  </div>
+              </div>
+            </div>
+          </div>
+        }
       </div>
-
-      <div className="Countries">
-        <h2>Country List</h2>
-        <ul>
-          {localCountries.map((country) => (
-            <li key={country.countryCode}>{country.countryName}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* <div className="CountryAssessment">
-        <h2>CountryAssessment</h2>
-      </div> */}
-    </>
-  );
+    );
+  }
 }
+
+export default App

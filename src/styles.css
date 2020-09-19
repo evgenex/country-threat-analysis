@@ -1,4 +1,110 @@
+body{
+  background-color: lightslategray;
+  margin: 0;
+  padding: 0;
+}
 .App {
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.Threat{
+  padding: 5px;
+  margin-right: 5px;
+  background-color: mintcream;
+  border-radius: 3px;
+  min-width: 100px;
+}
+.Factors{
+  padding: 5px;
+  margin-right: 5px;
+  color: maroon;
+}
+h1{
+  color: white;
+  background-color: #4D3943;
+  padding: 40px;
+  text-transform: uppercase;
+  margin-top: 0px;
+}
+h2{
+  color: Gainsboro;
+}
+h3{
+  color:#13232D;
+}
+button{
+  padding: 5px;
+  margin: 3px;
+  background-color: #28323E;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  border-radius: 3px;
+  border-style: none;
+  border-color: #13232D;
+  color: white;
+  text-transform: uppercase;
+}
+.Info{
+  display: flex;
+  justify-content: center;
+}
+.InfoBox{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #28323E;
+  border-style: solid;
+  border-color:  #13232D;
+  border-width: 5px;
+  margin-bottom: 30px;
+}
+
+.InfoBoxHeader{
+  color: white;
+  background-color: #4D3943;
+  text-align: left;
+  padding: 15px;
+}
+.InfoBoxHeaderLine1{
+  font-size: small;
+}
+.InfoBoxHeaderLine2{
+  font-size: large;
+}
+.InfoBoxMain{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.InfoBoxContent{
+  padding: 15px;
+}
+.InfoBoxContentText{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ font-size: small;
+ color: white;
+}
+.InfoBoxContentLine{
+  background-color:  #13232D;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  margin-top: 15px;
+}
+.InfoBoxContentLineIndicator{
+  height: 6px;
+  border-radius: 3px;
+  width: 50%;
+  
 }

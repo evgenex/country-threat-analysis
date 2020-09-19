@@ -1,5 +1,5 @@
-import httpGateway from "../shared/HttpGateway";
-import Observable from "../shared/Observable";
+import httpGateway from "../Shared/HttpGateway";
+import Observable from "../Shared/Observable";
 
 class ThreatModelRepository {
   programmersModel = new Observable({
