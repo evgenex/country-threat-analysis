@@ -4,7 +4,6 @@ import { observer } from "mobx-react";
 
 @observer
 class App extends React.Component {
-
   componentDidMount=()=>{
     this.props.store.loadThreatModel();
     this.props.store.loadCountry();

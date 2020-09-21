@@ -1,9 +1,9 @@
 import threatModelRepository from "./ThreatModelRepository";
 
 export default class ThreatModelPresenter {
-  load = async (callback) => {
-    await threatModelRepository.getModel((threatModelPm) => {
-      const threatModelVm = {
+  load = async () => {
+    const threatModelPm = await threatModelRepository.loadModel()
+    const threatModelVm = {
         name: threatModelPm.name,
         threatRatings: threatModelPm.ratings.map((rating) => {
           return {id: rating.id, name: rating.name, colour: rating.colour, ranking: rating.ranking };
@@ -11,7 +11,6 @@ export default class ThreatModelPresenter {
         threatFactors: threatModelPm.riskFactors.map((factor) => factor.name),
         pageTitle: "Country Threat Analysis"
       };
-      callback(threatModelVm);
-    });
+    return threatModelVm;
   };
 }

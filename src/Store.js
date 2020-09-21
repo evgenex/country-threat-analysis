@@ -1,10 +1,11 @@
 import { observable, action } from "mobx";
 import ThreatModelPresenter from "./ThreatModels/ThreatModelPresenter";
 import CountriesPresenter from "./Countries/CountriesPresenter";
-import httpGateway from "./shared/HttpGateway";
+import AssessmentPresenter from "./Assessment/AssessmentPresenter";
 
 const threatModelPresenter = new ThreatModelPresenter();
 const countryPresenter = new CountriesPresenter();
+const assessmentPresenter = new AssessmentPresenter()
 
 export default class Store {
   @observable localThreatModel = {
@@ -18,36 +19,22 @@ export default class Store {
     overallRating: "",
     riskFactors: [],
   };
+  @observable name = 'John';
 
   @action
   loadThreatModel = async()=> {
-    await threatModelPresenter.load((viewModel) => {
-      this.localThreatModel = viewModel;
-    });
+    const viewModel = await threatModelPresenter.load();
+    this.localThreatModel = viewModel;
   }
   @action
   loadCountry = async()=> {
-    await countryPresenter.load((viewModel) => {
-      this.localCountries = viewModel;
-    });
+    const viewModel = await countryPresenter.load();
+    this.localCountries = viewModel;
   }
   @action
   loadAssessment = async(countryCode)=> {
-    const assessment = await httpGateway.get(`countries/${countryCode}?include=assessment`);
-    const ratingId = assessment.threatAssessment.ratingId;
-    const countryRating = this.localThreatModel.threatRatings.find((threat) => threat.id === ratingId);
-    let riskFactors = assessment.threatAssessment.riskFactors.map((item)=>{
-      const factor = {
-        name: item.name,
-        rating: this.localThreatModel.threatRatings.find((threat) => threat.id === item.ratingId),
-      }
-      return factor;
-    })
-    const currentAssessment = {
-      country: countryCode,
-      overallRating: countryRating,
-      riskFactors: riskFactors,
-    }
+    const threatRatings =  this.localThreatModel.threatRatings;
+    const currentAssessment = await assessmentPresenter.load(countryCode, threatRatings);
     this.selectedCountry = currentAssessment;
   }
 }
