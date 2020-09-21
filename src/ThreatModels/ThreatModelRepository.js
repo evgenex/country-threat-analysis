@@ -1,6 +1,6 @@
 import httpGateway from "../shared/HttpGateway";
 
-class ThreatModelRepository {
+export default class ThreatModelRepository {
   loadModel = async () => {
     const modelDto = await httpGateway.get("threatModel");
     const programmersModel = {
@@ -11,6 +11,3 @@ class ThreatModelRepository {
     return programmersModel;
   };
 }
-
-const threatModelRepository = new ThreatModelRepository();
-export default threatModelRepository;

@@ -1,4 +1,6 @@
-import threatModelRepository from "./ThreatModelRepository";
+import ThreatModelRepository from "./ThreatModelRepository";
+
+const threatModelRepository = new ThreatModelRepository();
 
 export default class ThreatModelPresenter {
   load = async () => {

@@ -1,6 +1,6 @@
 import httpGateway from "../shared/HttpGateway";
 
-class CountriesRepository {
+export default class CountriesRepository {
   loadModel = async () => {
     const countriesDto = await httpGateway.get("countries");
     const countries = countriesDto.data.map((country) => {
@@ -9,6 +9,3 @@ class CountriesRepository {
     return countries;
   };
 }
-
-const countriesRepository = new CountriesRepository();
-export default countriesRepository;

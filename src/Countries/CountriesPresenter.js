@@ -1,4 +1,6 @@
-import countriesRepository from "../Countries/CountryRepository";
+import CountriesRepository from "../Countries/CountryRepository";
+
+const countriesRepository = new CountriesRepository();
 
 export default class CountriesPresenter {
   load = async () => {

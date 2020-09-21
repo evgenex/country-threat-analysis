@@ -1,5 +1,7 @@
 
-import assessmentRepository from "./AssessmentRepository";
+import AssessmentRepository from "./AssessmentRepository";
+
+const assessmentRepository = new AssessmentRepository();
 
 export default class AssessmentPresenter {
     load = async (countryCode, threatRatings) => {
