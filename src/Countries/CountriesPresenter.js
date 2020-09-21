@@ -1,4 +1,4 @@
-import CountriesRepository from "../Countries/CountryRepository";
+import CountriesRepository from "./CountriesRepository";
 
 const countriesRepository = new CountriesRepository();
 
