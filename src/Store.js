@@ -36,13 +36,12 @@ export default class Store {
     const assessment = await httpGateway.get(`countries/${countryCode}?include=assessment`);
     const ratingId = assessment.threatAssessment.ratingId;
     const countryRating = this.localThreatModel.threatRatings.find((threat) => threat.id === ratingId);
-    let riskFactors = [];
-    assessment.threatAssessment.riskFactors.map((item)=>{
+    let riskFactors = assessment.threatAssessment.riskFactors.map((item)=>{
       const factor = {
         name: item.name,
         rating: this.localThreatModel.threatRatings.find((threat) => threat.id === item.ratingId),
       }
-      riskFactors.push(factor);
+      return factor;
     })
     const currentAssessment = {
       country: countryCode,
